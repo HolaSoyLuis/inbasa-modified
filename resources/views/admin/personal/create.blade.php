@@ -81,7 +81,7 @@
 
 							<div class="col"> {{-- Cuarta Columna --}}
 								<div class="form-group label-floating">								
-									<label for="s_apellido">Segndo Apellido</label>
+									<label for="s_apellido">Segundo Apellido</label>
 									<input type="text" class="form-control{{ $errors->has('s_apellido') ? ' is-invalid' : '' }}" name="s_apellido" input id="s_apellido">
 									@if ($errors->has('s_apellido'))
 										<span class="invalid-feedback" role="alert">
@@ -120,7 +120,7 @@
 							<div class="col">  {{--Tercera Columna --}}									
 								<div class="form-group label-floating">								
 									<select class="form-control" name="genero" id="genero">
-										<option value="" disabled selected hidden>---Seleccione una Genero---</option>																											
+										<option value="" disabled selected hidden>---Seleccione un Genero---</option>																											
 										<option value="Masculino">Masculino</option>	
 										<option value="Femenino">Femenino</option>
 									</select>
@@ -254,7 +254,7 @@
 							<div class="col"> {{-- Tercera Columna --}}
 								<div class="form-group label-floating">																													
 									<select class="form-control" name="centro_id" id="centro_id" >
-										<option value="" disabled selected hidden>---Seleccione una Centro---</option>
+										<option value="" disabled selected hidden>---Seleccione un Centro---</option>
 										@foreach ($centros as $u)
 										<option value="{{ $u['id'] }}">{{ $u['nombre'] }}</option>								
 										@endforeach

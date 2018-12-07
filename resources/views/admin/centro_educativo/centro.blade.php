@@ -29,8 +29,10 @@
 							<td>Direccion</td>											
 							<td>Departamento</td>
 							<td>Ciudad</td>							
-              <td>Telefono</td>																		
+              <td>Telefono</td>
+							<!--																		
 							<td>Opciones</td>
+							-->
 						</thead>		
 						@foreach($centros as $c)		
 						<tr>
@@ -40,6 +42,7 @@
 							<td class="td-actions text-left">{{$c->departamento}}</td>
 							<td class="td-actions text-left">{{$c->ciudad}}</td>
 							<td class="td-actions text-left">{{$c->telefono1}}</td>      									
+							<!--
 							<td class="td-actions text-center">
 								<form method="post" action="">						
 									<a href="" class="btn btn-info btn-sm" title="Ver">
@@ -49,12 +52,13 @@
 										<i class="material-icons">edit</i>Editar
 									</a>													
 									@csrf
-                                    @method('DELETE')
+                  @method('DELETE')
 									<button type="submit" class="btn btn-danger btn-sm" title="Eliminar">
 										<i class="material-icons">delete</i>Eliminar
 									</button>								
 								</form>
 							</td>
+						-->
 						</tr>	
 						@endforeach						
 					</table>

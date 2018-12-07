@@ -25,71 +25,63 @@
 		<div class="table-responsive">
 			<table id="datatable_table" class="table table-striped table-bordered table-condensed table-hover">
 				<thead>
-					<th>No</th>	
-					<th>Nota</th>					
-					<th>Tipo</th>	
-					<th>Bloque</th>
-					<th>Estudiante</th>
-					<th>ID Curso</th>
-					<th>Creado</th>
-					<th>Actualizado</th>
-					<th>Eliminado</th>
-					<th>Opciones</th>
-
+					<th>No</th>
+					<th>Curso</th>
+					<th>Nota</th>
+					<th>Aspecto</th>
+					<th>Tipo</th>
+					<th>Bimestre</th>
 				</thead>		
 				@foreach($notas_detalle as $n)		
 				<tr>
-					<td>{{$n->id}}</td>
-					<td>{{$n->nota}}</td>
-                @foreach($tipo_evaluaciones as $tipo)
-              @if($tipo->id == $n->tipo_evaluacion_id)
-                <td>{{ $tipo['tipo'] }}</td>
-              @endif
-            @endforeach
+				<td>{{$n->id}}</td>
 
-                  @foreach($bloques as $bloque)
-              @if($bloque->id == $n->bloque_id)
-                <td>{{ $bloque['bloque'] }}</td>
-              @endif
-            @endforeach
+				<td>
+               		@foreach($cursos as $curso)
+              			@if($curso->id == $n->curso_id)
+                			{{ $curso['nombre'] }}
+              			@endif
+            		@endforeach
+            	</td>
 
-                 @foreach ($estudiantes as $estudiante)
-              @if ($estudiante->id == $n->estudiante_id)
-                <td>{{ $estudiante['p_nombre'] }} {{ $estudiante['s_nombre'] }} {{ $estudiante['p_apellido'] }} {{ $estudiante['s_apellido'] }}</td>
-              @endif
-            @endforeach
+            	<td>
+            		{{ $n->nota }}
+            	</td>
 
-               @foreach($cursos as $curso)
-              @if($curso->id == $n->curso_id)
-                <td>{{ $curso['nombre'] }}</td>
-              @endif
-            @endforeach
-					
-					<td>{{$n->created_at}}</td>
-					<td>{{$n->updated_at}}</td>
-					<td>{{$n->deleted_at}}</td>
-					<td>
-						<a href="#">
-							<button class="btn btn-info btn-sm" title="Ver">
-								<i class="material-icons">visibility</i>
-								Ver
-							</button>
-						</a>
-						<a href="#">
-							<button class="btn btn-primary btn-sm" title="Editar">
-								<i class="material-icons">edit</i>
-								Editar
-							</button>
-						</a>
-						<a href="" data-target="#" data-toggle="modal">
-							<button class="btn btn-danger btn-sm" title="Eliminar">
-								<i class="material-icons">delete</i>
-								Eliminar
-							</button>
-						</a>
-					</td>
-				</tr>	
-				@endforeach						
+            	<td>
+            		@foreach($aspectos as $a)
+            			@if($n->aspecto_id == $a->id)
+            				{{ $a->aspecto }}
+            			@endif
+            		@endforeach
+            	</td>
+
+				<td>
+                	@foreach($tipo_evaluaciones as $tipo)
+              			@if($tipo->id == $n->tipo_evaluacion_id)
+                			{{ $tipo['tipo'] }}
+              			@endif
+            		@endforeach
+            	</td>
+
+            	<td>
+            		@foreach($bimestres as $b)
+            			@if($n->bimestre_id == $b->id)
+            				{{ $b->bimestre }}
+            			@endif
+            		@endforeach
+            	</td>
+<!--
+    	        <td>
+                 	@foreach ($estudiantes as $estudiante)
+              			@if ($estudiante->id == $n->estudiante_id)
+                			{{ $estudiante['p_nombre'] }} {{ $estudiante['s_nombre'] }} {{ $estudiante['p_apellido'] }} {{ $estudiante['s_apellido'] }}
+              			@endif
+            		@endforeach
+        		</td>
+-->
+				</tr>
+				@endforeach
 			</table>
 		</div>		
 	</div>

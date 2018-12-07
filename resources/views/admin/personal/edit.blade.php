@@ -85,7 +85,7 @@
 
 							<div class="col"> {{-- Cuarta Columna --}}
 								<div class="form-group label-floating">								
-									<label for="s_apellido">Segndo Apellido</label>
+									<label for="s_apellido">Segundo Apellido</label>
 									<input type="text" class="form-control{{ $errors->has('s_apellido') ? ' is-invalid' : '' }}" value='{{$empleados->s_nombre}}' name="s_apellido" input id="s_apellido">
 									@if ($errors->has('s_apellido'))
 										<span class="invalid-feedback" role="alert">

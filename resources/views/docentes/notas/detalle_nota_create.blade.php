@@ -23,34 +23,18 @@
 	</div>
 </div>
 
-
-
-
-
 <div class="container">
 	<div class="row justify-content-center">	
 		<div class="col">
-			
 			<div class="card">
-				   
-      <br/>
-    		
-    					<div class="card-body text-center">				
-				<form method="post" action="{{ route('detalle_nota.store') }}">
+    			<div class="card-body text-center">				
+					<form method="post" action="{{ route('detalle_nota.store') }}">
 					@csrf
-					
-				
 					<h3>Ingrese los Datos</h3>	
 
-
-
-
-			 {{--Formulario--}}	
-
-
- 		<div class="form-row">  {{--Contenedor Primera Fila--}}		
-
-
+{{--Formulario--}}	
+ 		
+ 		<div class="form-row">  {{--Contenedor Primera Fila--}}
 
 				<div class="col">  {{--Primera Columna --}}	
 						<div class="form-group">
@@ -59,188 +43,107 @@
 								<input type="text" class="form-control{{ $errors->has('nota') ? ' is-invalid' : '' }}" name="nota" input id="nota"></input>
 								@if ($errors->has('nota'))
 										<span class="invalid-feedback" role="alert">
-												<strong>{{ $errors->first('nota') }}</strong>
+											<strong>{{ $errors->first('nota') }}</strong>
 										</span>
 								@endif					
 							</div>
 						</div>
-
 				</div> {{--Fin Columna--}}
 
-
-<!--
 				<div class="col">  {{--Segunda Columna --}}	
 					<div class="form-group label-floating">								
-								<label for="nota_id">Nota ID</label>																
-								<select class="form-control{{ $errors->has('tipo_evaluacion_id') ? ' is-invalid' : '' }}" name="nota_id" id="nota_id">
-									@foreach ($notas as $u)
-										<option value="{{ $u['id'] }}">{{ $u['total_bloque']}}</option>										
-									@endforeach																										
-								</select>																							
-								@if ($errors->has('nota_id'))
-										<span class="invalid-feedback" role="alert">
-												<strong>{{ $errors->first('nota_id') }}</strong>
-										</span>
-								@endif					
-							</div>
-
+						<label for="aspecto_id">Aspecto</label>
+						<select class="form-control{{ $errors->has('tipo_evaluacion_id') ? ' is-invalid' : '' }}" name="aspecto_id" id="aspecto_id">
+							@foreach ($aspectos as $u)
+								<option value="{{ $u['id'] }}">{{ $u['aspecto']}}</option>					
+							@endforeach														
+						</select>				
+						@if ($errors->has('aspecto_id'))
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $errors->first('aspecto_id') }}</strong>
+							</span>
+						@endif					
+					</div>
 				</div> {{--Fin Columna--}}
--->
 
-
-<!--
-				<div class="col">  {{--Tercera Columna --}}	
+				<div class="col"> {{-- Tercera Columna --}}							
 					<div class="form-group label-floating">								
-								<label for="aspecto_id">Aspecto</label>																
-								<select class="form-control{{ $errors->has('tipo_evaluacion_id') ? ' is-invalid' : '' }}" name="aspecto_id" id="aspecto_id">
-									@foreach ($aspectos as $u)
-										<option value="{{ $u['id'] }}">{{ $u['aspecto']}}</option>										
-									@endforeach																										
-								</select>																							
-								@if ($errors->has('aspecto_id'))
-										<span class="invalid-feedback" role="alert">
-												<strong>{{ $errors->first('aspecto_id') }}</strong>
-										</span>
-								@endif					
-							</div>
-
+						<label for="tipo_evaluacion_id">Tipo de Evaluacion</label>
+						<select class="form-control{{ $errors->has('tipo_evaluacion_id') ? ' is-invalid' : '' }}" name="tipo_evaluacion_id" id="tipo_evaluacion_id">
+							@foreach ($tipo_evaluaciones as $u)
+								<option value="{{ $u['id'] }}">{{ $u['tipo']}}</option>					
+							@endforeach								
+						</select>		
+						@if ($errors->has('tipo_evaluacion_id'))
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $errors->first('tipo_evaluacion_id') }}</strong>
+							</span>
+						@endif					
+					</div>
 				</div> {{--Fin Columna--}}
 
--->
 
-
-				
-
-
-
-
-
-				<div class="col"> {{-- Curarta Columna --}}
-
-
-							
+				<div class="col"> {{-- Quinta Columna --}}		
 					<div class="form-group label-floating">								
-								<label for="tipo_evaluacion_id">Tipo de Evaluacion</label>																
-								<select class="form-control{{ $errors->has('tipo_evaluacion_id') ? ' is-invalid' : '' }}" name="tipo_evaluacion_id" id="tipo_evaluacion_id">
-									@foreach ($tipo_evaluaciones as $u)
-										<option value="{{ $u['id'] }}">{{ $u['tipo']}}</option>										
-									@endforeach																										
-								</select>																							
-								@if ($errors->has('tipo_evaluacion_id'))
-										<span class="invalid-feedback" role="alert">
-												<strong>{{ $errors->first('tipo_evaluacion_id') }}</strong>
-										</span>
-								@endif					
-							</div>
-
-
+						<label for="bimestre_id">Bimestre</label>
+						<select class="form-control{{ $errors->has('bimestre_id') ? ' is-invalid' : '' }}" name="bimestre_id" id="bimestre_id">
+							@foreach ($bimestres as $b)
+								<option value="{{ $b->id }}">{{ $b->bimestre }}</option>
+							@endforeach
+						</select>					
+						@if ($errors->has('bimestre_id'))
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $errors->first('bimestre_id') }}</strong>
+							</span>
+						@endif					
+					</div>
 				</div> {{--Fin Columna--}}
-
-
-				<div class="col"> {{-- Quinta Columna --}}
-
-
-							
-					<div class="form-group label-floating">								
-								<label for="bloque_id">Bloque</label>																
-								<select class="form-control{{ $errors->has('tipo_evaluacion_id') ? ' is-invalid' : '' }}" name="bloque_id" id="bloque_id">
-									@foreach ($bloques as $u)
-										<option value="{{ $u['id'] }}">{{ $u['bloque']}}</option>										
-									@endforeach																										
-								</select>																							
-								@if ($errors->has('bloque_id'))
-										<span class="invalid-feedback" role="alert">
-												<strong>{{ $errors->first('bloque_id') }}</strong>
-										</span>
-								@endif					
-							</div>
-
-
-				</div> {{--Fin Columna--}}
-
-
-
 
 		</div>{{-- Fin Contenedor --}}
 
-
-		<div class="form-row">  {{--Contenedor Segunda Fila--}}	
-
+		<div class="form-row">  {{--Contenedor Segunda Fila--}}
 
 				<div class="col"> {{-- Primera Columna --}}
-
-					<div class="form-group label-floating">								
-								<label for="estudiante_id">Estudiante</label>																
-								<select class="form-control{{ $errors->has('estudiante_id') ? ' is-invalid' : '' }}" name="estudiante_id" id="estudiante_id">
-									@foreach ($estudiantes as $u)
-										<option value="{{ $u['id'] }}">{{ $u['p_nombre'] }} {{ $u['s_nombre'] }} {{ $u['p_apellido'] }} {{ $u['s_apellido'] }}</option>										
-									@endforeach																										
-								</select>																							
-								@if ($errors->has('estudiante_id'))
-										<span class="invalid-feedback" role="alert">
-												<strong>{{ $errors->first('estudiante_id') }}</strong>
-										</span>
-								@endif					
-							</div>
-
+					<div class="form-group label-floating">
+						<label for="estudiante_id">Estudiante</label>
+						<select class="form-control{{ $errors->has('estudiante_id') ? ' is-invalid' : '' }}" name="estudiante_id" id="estudiante_id">
+							@foreach ($estudiantes as $u)
+								<option value="{{ $u['id'] }}">{{ $u['p_nombre'] }} {{ $u['s_nombre'] }} {{ $u['p_apellido'] }} {{ $u['s_apellido'] }}</option>
+							@endforeach									
+						</select>				
+						@if ($errors->has('estudiante_id'))
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $errors->first('estudiante_id') }}</strong>
+							</span>
+						@endif					
+					</div>
 				</div> {{--Fin Columna--}}
-
-
 
 				<div class="col"> {{-- Segunda Columna --}}
-
-							<div class="form-group label-floating">								
-										
-										<label for="curso_id">Cursos</label>
-										<select class="form-control{{ $errors->has('curso_id') ? ' is-invalid' : '' }}" name="curso_id" id="curso_id" >
-											
-												@foreach ($cursos as $u)
-												
-													<option value="{{ $u['id'] }}">{{ $u['nombre'] }}</option>			
-				
-												@endforeach																										
-											</select>																							
-											@if ($errors->has('curso_id'))
-													<span class="invalid-feedback" role="alert">
-															<strong>{{ $errors->first('curso_id') }}</strong>
-													</span>
-											@endif					
-										</div>
-
-
+					<div class="form-group label-floating">
+						<label for="curso_id">Cursos</label>
+						<select class="form-control{{ $errors->has('curso_id') ? ' is-invalid' : '' }}" name="curso_id" id="curso_id" >
+						@foreach ($cursos as $u)
+							<option value="{{ $u['id'] }}">{{ $u['nombre'] }}</option>
+						@endforeach
+						</select>
+						@if ($errors->has('curso_id'))
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $errors->first('curso_id') }}</strong>
+							</span>
+						@endif
+					</div>
 				</div> {{--Fin Columna--}}
-
-
-
-		</div>{{-- Fin Contenedor --}}
-
-
- 		
-
-
-
-
-
-							
-						
-					
-
-
-
-						</div>
-																	
-						<div class="form-group text-center">
-							<button class="btn btn-primary" type="submit">Guardar</button>				
-						</div>
+		</div>{{-- Fin Contenedor --}}											
+		
+					<div class="form-group text-center">
+						<button class="btn btn-primary" type="submit">Guardar</button>
+					</div>
 					</form>											
 				</div>
 			</div>
-
-
-	
 		</div>
 	</div>
-
 </div>
 
 

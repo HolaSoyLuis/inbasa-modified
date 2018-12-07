@@ -8,6 +8,13 @@ use App\Grado;
 use App\Empleado;
 use App\Cargo;
 
+use App\Nota;
+use App\Ciclo;
+use App\Estudiante;
+use App\User;
+use App\Asignacion;
+use App\DetalleNota;
+
 class CursoController extends Controller
 {
     /**
@@ -37,7 +44,14 @@ class CursoController extends Controller
 
     //Vista de cursos de un estudiante
     public function indexES(){
-        return view('estudiante/cursos/cursos');
+        $user = User::all();
+        $estudiante = Estudiante::all();
+        $ciclo = Ciclo::all();
+        $curso = Curso::all();
+        $nota = DetalleNota::all();
+        $asignacion = Asignacion::all();
+
+        return view('estudiante/cursos/cursos', compact('ciclo', 'curso', 'nota', 'user', 'estudiante', 'asignacion'));
     }
 
     /**
