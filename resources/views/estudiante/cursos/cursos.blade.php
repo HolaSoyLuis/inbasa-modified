@@ -5,7 +5,7 @@
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
-			<div class="card-body">	
+			<div class="card-body">
         <div class="table-responsive">
           <table id="datatable_table" class="table table-condensed table-hover">
             <thead>
@@ -22,16 +22,23 @@
             <tbody>
               <tr>
                 <td>
-                @foreach($estudiante as $e)
-                    @if($e->usuario_id == auth()->user()->id)
-                        @foreach($nota as $n)
-                            @if($n->estudiante_id == $e->id)
-                                {{ $n->nota }}
-                            @endif
-                        @endforeach
-                    @endif
-                @endforeach
+									{{-- ciclo --}}
                 </td>
+								<td>
+									{{-- curso --}}
+								</td>
+								<td>
+									{{ $bimestre1 }}
+								</td>
+								<td>
+									{{ $bimestre2 }}
+								</td>
+								<td>
+									{{ $bimestre3 }}
+								</td>
+								<td>
+									{{ $bimestre4 }}
+								</td>
               </tr>
             </tbody>
           </table>

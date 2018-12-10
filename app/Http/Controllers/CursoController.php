@@ -14,6 +14,9 @@ use App\Estudiante;
 use App\User;
 use App\Asignacion;
 use App\DetalleNota;
+use App\Bimestre;
+
+use Illuminate\Support\Facades\Auth;
 
 class CursoController extends Controller
 {
@@ -24,11 +27,11 @@ class CursoController extends Controller
      */
     //Index para modulo admin
     public function index()
-    {        
+    {
         $cursos = Curso::all();
         $empleados = Empleado::all();
         $grados = Grado::all();
-        return view('admin/cursos/cursos')->with(compact('cursos', 'empleados', 'grados'));        
+        return view('admin/cursos/cursos')->with(compact('cursos', 'empleados', 'grados'));
     }
 
     /**
@@ -50,8 +53,72 @@ class CursoController extends Controller
         $curso = Curso::all();
         $nota = DetalleNota::all();
         $asignacion = Asignacion::all();
+        $bimestre = Bimestre::all();
 
-        return view('estudiante/cursos/cursos', compact('ciclo', 'curso', 'nota', 'user', 'estudiante', 'asignacion'));
+        $useruser = Auth::user();
+
+        $bimestre1 = 0;
+        $bimestre2 = 0;
+        $bimestre3 = 0;
+        $bimestre4 = 0;
+
+        foreach ($estudiante as $e) {
+          if ($e->usuario_id == $useruser->id) {
+            foreach ($nota as $n) {
+              foreach ($bimestre as $b) {
+                if ($n->bimestre_id == $b->id) {
+                  if ($n->estudiante_id == $e->id && $b->bimestre == 'Bimestre I') {
+                    $bimestre1 += (int) $n->nota;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        foreach ($estudiante as $e) {
+          if ($e->usuario_id == $useruser->id) {
+            foreach ($nota as $n) {
+              foreach ($bimestre as $b) {
+                if ($n->bimestre_id == $b->id) {
+                  if ($n->estudiante_id == $e->id && $b->bimestre == 'Bimestre II') {
+                    $bimestre2 += (int) $n->nota;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        foreach ($estudiante as $e) {
+          if ($e->usuario_id == $useruser->id) {
+            foreach ($nota as $n) {
+              foreach ($bimestre as $b) {
+                if ($n->bimestre_id == $b->id) {
+                  if ($n->estudiante_id == $e->id && $b->bimestre == 'Bimestre III') {
+                    $bimestre3 += (int) $n->nota;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        foreach ($estudiante as $e) {
+          if ($e->usuario_id == $useruser->id) {
+            foreach ($nota as $n) {
+              foreach ($bimestre as $b) {
+                if ($n->bimestre_id == $b->id) {
+                  if ($n->estudiante_id == $e->id && $b->bimestre == 'Bimestre IV') {
+                    $bimestre4 += (int) $n->nota;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        return view('estudiante/cursos/cursos', compact('ciclo', 'curso', 'nota', 'user', 'estudiante', 'asignacion', 'bimestre1', 'bimestre2', 'bimestre3', 'bimestre4'));
     }
 
     /**
@@ -61,7 +128,7 @@ class CursoController extends Controller
      */
     public function create()
     {
-        $grados = Grado::all();  
+        $grados = Grado::all();
         $docentes = Empleado::all();
         $cargos = Cargo::all();
         return view('admin/cursos/create')->with(compact('grados','docentes', 'cargos'));
@@ -77,7 +144,7 @@ class CursoController extends Controller
     {
         $cursos = Curso::create($request->all());
         $request->session()->flash('alert-success', 'Curso Creado');
-        return redirect()->route('cursos.index');  
+        return redirect()->route('cursos.index');
     }
 
     /**
@@ -89,10 +156,10 @@ class CursoController extends Controller
     public function show(Curso $curso, $id)
     {
         $cursos = Curso::find($id);
-        $grados = Grado::all();  
+        $grados = Grado::all();
         $docentes = Empleado::all();
         $cargos = Cargo::all();
-        return view('admin/cursos/show')->with(compact('cursos', 'grados','docentes', 'cargos'));        
+        return view('admin/cursos/show')->with(compact('cursos', 'grados','docentes', 'cargos'));
     }
 
     /**
@@ -104,7 +171,7 @@ class CursoController extends Controller
     public function edit($id)
     {
         $cursos = Curso::find($id);
-        $grados = Grado::all();  
+        $grados = Grado::all();
         $docentes = Empleado::all();
         $cargos = Cargo::all();
         return view('admin/cursos/edit')->with(compact('cursos', 'grados','docentes', 'cargos'));
@@ -120,9 +187,9 @@ class CursoController extends Controller
     public function update(CursoRequest $request, $id)
     {
         $cursos = Curso::find($id);
-        $cursos->fill($request->all())->save();        
+        $cursos->fill($request->all())->save();
         $request->session()->flash('alert-success', 'Curso Actualizado');
-        return redirect()->route('cursos.index'); 
+        return redirect()->route('cursos.index');
     }
 
     /**
@@ -134,7 +201,7 @@ class CursoController extends Controller
     public function destroy(Request $request, $id)
     {
         $cursos = Curso::find($id);
-        $cursos->delete();        
+        $cursos->delete();
 
         $request->session()->flash('alert-success', 'Curso Eliminado');
         return redirect()->back();
