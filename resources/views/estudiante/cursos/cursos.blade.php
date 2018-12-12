@@ -28,16 +28,19 @@
 									{{-- curso --}}
 								</td>
 								<td>
-									{{ $bimestre1 }}
+									{{----}}
 								</td>
 								<td>
-									{{ $bimestre2 }}
+									{{----}}
 								</td>
 								<td>
-									{{ $bimestre3 }}
+									{{----}}
 								</td>
 								<td>
-									{{ $bimestre4 }}
+									{{----}}
+								</td>
+								<td>
+									{{----}}
 								</td>
               </tr>
             </tbody>

@@ -1,8 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+//namespace App\Http\Controllers\DB;
+//use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\CursoRequest;
+
+use DB;
+
 use App\Curso;
 use App\Grado;
 use App\Empleado;
@@ -54,13 +59,40 @@ class CursoController extends Controller
         $nota = DetalleNota::all();
         $asignacion = Asignacion::all();
         $bimestre = Bimestre::all();
+        $user_data = Auth::user();
 
-        $useruser = Auth::user();
+        /*
+        // ciclo->curso
+        $notas = 0;
+        // n_notas
+        foreach ($estudiante as $e) {
+          if ($e->usuario_id == $useruser->id) {
+            foreach ($nota as $n) {
+              $notas += 1;
+            }
+          }
+        }
 
+        $notas_index[$notas];
+
+        $loop_n = 0;
+        // index de las notas
+        foreach ($estudiante as $e) {
+          if ($e->usuario_id == $useruser->id) {
+            foreach ($nota as $n) {
+              $notas_index[$loop_n] = $n->id;
+              $loop_n += 1;
+            }
+          }
+        }
+
+        // sumando las notas por bimestres
         $bimestre1 = 0;
         $bimestre2 = 0;
         $bimestre3 = 0;
         $bimestre4 = 0;
+
+        $promedio = 0;
 
         foreach ($estudiante as $e) {
           if ($e->usuario_id == $useruser->id) {
@@ -118,7 +150,15 @@ class CursoController extends Controller
           }
         }
 
-        return view('estudiante/cursos/cursos', compact('ciclo', 'curso', 'nota', 'user', 'estudiante', 'asignacion', 'bimestre1', 'bimestre2', 'bimestre3', 'bimestre4'));
+        $promedio = ($bimestre1 + $bimestre2 + $bimestre3 + $bimestre4)/4;
+        */
+        // echo $nota[1];
+
+        $data = DB::select("select concat(fecha_inicio, '-', fecha_fin) as ciclo, cursos.nombre as curso, nota, bimestre from users inner join role_user on role_user.user_id = users.id inner join estudiantes on estudiantes.usuario_id = role_user.user_id inner join detalle_notas on detalle_notas.estudiante_id = estudiantes.id inner join bimestres on detalle_notas.bimestre_id = bimestres.id inner join ciclos on bimestres.ciclo_id = ciclos.id inner join cursos on detalle_notas.curso_id = cursos.id where usuario_id = ?;", [$user_data->id]);
+
+        //
+
+        return view('estudiante/cursos/cursos', compact('data'));
     }
 
     /**
