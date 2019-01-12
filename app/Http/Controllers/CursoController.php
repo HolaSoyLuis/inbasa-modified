@@ -149,15 +149,19 @@ class CursoController extends Controller
             }
           }
         }
-
-        $promedio = ($bimestre1 + $bimestre2 + $bimestre3 + $bimestre4)/4;
         */
-        // echo $nota[1];
-
+        /*
         $data = DB::select("select concat(fecha_inicio, '-', fecha_fin) as ciclo, cursos.nombre as curso, nota, bimestre from users inner join role_user on role_user.user_id = users.id inner join estudiantes on estudiantes.usuario_id = role_user.user_id inner join detalle_notas on detalle_notas.estudiante_id = estudiantes.id inner join bimestres on detalle_notas.bimestre_id = bimestres.id inner join ciclos on bimestres.ciclo_id = ciclos.id inner join cursos on detalle_notas.curso_id = cursos.id where usuario_id = ?;", [$user_data->id]);
-
-        //
-
+        */
+        
+        $data = DB::select("select concat(fecha_inicio, ' a ', fecha_fin) as ciclo, cursos.nombre as curso, truncate(SUM(nota)/4,0) as nota from users
+          inner join role_user on role_user.user_id = users.id
+          inner join estudiantes on estudiantes.usuario_id = role_user.user_id
+          inner join detalle_notas on detalle_notas.estudiante_id = estudiantes.id
+          inner join bimestres on detalle_notas.bimestre_id = bimestres.id
+          inner join ciclos on bimestres.ciclo_id = ciclos.id inner join cursos on detalle_notas.curso_id = cursos.id
+          where usuario_id = 6 group by ciclo;", [$user_data->id]);
+        
         return view('estudiante/cursos/cursos', compact('data'));
     }
 

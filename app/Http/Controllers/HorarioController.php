@@ -1,8 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+
+use DB;
+
+use App\Curso;
+use App\Grado;
+use App\Empleado;
+use App\Cargo;
+
+use App\Nota;
+use App\Ciclo;
+use App\Estudiante;
+use App\User;
+use App\Asignacion;
+use App\DetalleNota;
+use App\Bimestre;
 
 class HorarioController extends Controller
 {
@@ -23,7 +38,118 @@ class HorarioController extends Controller
 
     //Vista del horario de clases del estudiante
     public function indexES(){
-        return view('estudiante/horario/horario');
+        $user = User::all();
+        $estudiante = Estudiante::all();
+        $ciclo = Ciclo::all();
+        $curso = Curso::all();
+        $nota = DetalleNota::all();
+        $asignacion = Asignacion::all();
+        $bimestre = Bimestre::all();
+        $user_data = Auth::user();
+
+        /*
+        // ciclo->curso
+        $notas = 0;
+        // n_notas
+        foreach ($estudiante as $e) {
+          if ($e->usuario_id == $useruser->id) {
+            foreach ($nota as $n) {
+              $notas += 1;
+            }
+          }
+        }
+
+        $notas_index[$notas];
+
+        $loop_n = 0;
+        // index de las notas
+        foreach ($estudiante as $e) {
+          if ($e->usuario_id == $useruser->id) {
+            foreach ($nota as $n) {
+              $notas_index[$loop_n] = $n->id;
+              $loop_n += 1;
+            }
+          }
+        }
+
+        // sumando las notas por bimestres
+        $bimestre1 = 0;
+        $bimestre2 = 0;
+        $bimestre3 = 0;
+        $bimestre4 = 0;
+
+        $promedio = 0;
+
+        foreach ($estudiante as $e) {
+          if ($e->usuario_id == $useruser->id) {
+            foreach ($nota as $n) {
+              foreach ($bimestre as $b) {
+                if ($n->bimestre_id == $b->id) {
+                  if ($n->estudiante_id == $e->id && $b->bimestre == 'Bimestre I') {
+                    $bimestre1 += (int) $n->nota;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        foreach ($estudiante as $e) {
+          if ($e->usuario_id == $useruser->id) {
+            foreach ($nota as $n) {
+              foreach ($bimestre as $b) {
+                if ($n->bimestre_id == $b->id) {
+                  if ($n->estudiante_id == $e->id && $b->bimestre == 'Bimestre II') {
+                    $bimestre2 += (int) $n->nota;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        foreach ($estudiante as $e) {
+          if ($e->usuario_id == $useruser->id) {
+            foreach ($nota as $n) {
+              foreach ($bimestre as $b) {
+                if ($n->bimestre_id == $b->id) {
+                  if ($n->estudiante_id == $e->id && $b->bimestre == 'Bimestre III') {
+                    $bimestre3 += (int) $n->nota;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        foreach ($estudiante as $e) {
+          if ($e->usuario_id == $useruser->id) {
+            foreach ($nota as $n) {
+              foreach ($bimestre as $b) {
+                if ($n->bimestre_id == $b->id) {
+                  if ($n->estudiante_id == $e->id && $b->bimestre == 'Bimestre IV') {
+                    $bimestre4 += (int) $n->nota;
+                  }
+                }
+              }
+            }
+          }
+        }
+        */
+        /*
+        $data = DB::select("select concat(fecha_inicio, '-', fecha_fin) as ciclo, cursos.nombre as curso, nota, bimestre from users inner join role_user on role_user.user_id = users.id inner join estudiantes on estudiantes.usuario_id = role_user.user_id inner join detalle_notas on detalle_notas.estudiante_id = estudiantes.id inner join bimestres on detalle_notas.bimestre_id = bimestres.id inner join ciclos on bimestres.ciclo_id = ciclos.id inner join cursos on detalle_notas.curso_id = cursos.id where usuario_id = ?;", [$user_data->id]);
+        */
+        
+        $data = DB::select("select concat(fecha_inicio, ' a ', fecha_fin) as ciclo, cursos.nombre as curso, SUM(nota) as nota, bimestre from users
+            inner join role_user on role_user.user_id = users.id
+            inner join estudiantes on estudiantes.usuario_id = role_user.user_id
+            inner join detalle_notas on detalle_notas.estudiante_id = estudiantes.id
+            inner join bimestres on detalle_notas.bimestre_id = bimestres.id
+            inner join ciclos on bimestres.ciclo_id = ciclos.id
+            inner join cursos on detalle_notas.curso_id = cursos.id
+            where usuario_id = 6 group by bimestre;", [$user_data->id]);
+        
+        return view('estudiante/horario/horario', compact('data'));
     }
     /**
      * Show the form for creating a new resource.

@@ -12,37 +12,23 @@
               <tr>
                 <td>Ciclo</td>
                 <td>Curso</td>
-                <td>Bimestre I</td>
-                <td>Bimestre II</td>
-                <td>Bimestre III</td>
-                <td>Bimestre IV</td>
                 <td>Nota Final</td>
               </tr>
             </thead>
             <tbody>
+              @foreach($data as $d)
               <tr>
                 <td>
-									{{-- ciclo --}}
+									{{ $d->ciclo }}
                 </td>
 								<td>
-									{{-- curso --}}
+									{{ $d->curso }}
 								</td>
 								<td>
-									{{----}}
-								</td>
-								<td>
-									{{----}}
-								</td>
-								<td>
-									{{----}}
-								</td>
-								<td>
-									{{----}}
-								</td>
-								<td>
-									{{----}}
+                  {{ $d->nota }}
 								</td>
               </tr>
+              @endforeach
             </tbody>
           </table>
         </div>

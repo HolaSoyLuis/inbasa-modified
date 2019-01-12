@@ -11,7 +11,8 @@ use App\Nota;
 use App\Aspecto;
 use App\Bloque;
 use App\Bimestre;
- 
+use App\Ciclo;
+
 class DetalleNotaController extends Controller
 {
     /**
@@ -29,8 +30,9 @@ class DetalleNotaController extends Controller
         $aspectos = Aspecto::all();
         $bloques = Bloque::all();
         $bimestres = Bimestre::all();
+        $ciclos = Ciclo::all();
 
-        return view('docentes/notas/detalle_nota', compact('notas_detalle','estudiantes','cursos','tipo_evaluaciones','notas','aspectos','bloques', 'bimestres'));
+        return view('docentes/notas/detalle_nota', compact('notas_detalle','estudiantes','cursos','tipo_evaluaciones','notas','aspectos','bloques', 'bimestres', 'ciclos'));
     }
 
     /**
@@ -47,7 +49,9 @@ class DetalleNotaController extends Controller
         $aspectos = Aspecto::all();
         $bloques = Bloque::all();
         $bimestres = Bimestre::all();
-        return view("docentes/notas/detalle_nota_create")->with(compact('estudiantes','cursos','tipo_evaluaciones','notas','aspectos','bloques', 'bimestres')); 
+        $ciclos = Ciclo::all();
+
+        return view("docentes/notas/detalle_nota_create")->with(compact('estudiantes','cursos','tipo_evaluaciones','notas','aspectos','bloques', 'bimestres', 'ciclos'));
     }
 
     /**
@@ -65,6 +69,7 @@ class DetalleNotaController extends Controller
             'bimestre_id'=> 'required',
             'tipo_evaluacion_id'=> 'required',
             'estudiante_id'=> 'required',
+            'ciclo_id'=> 'required',
             'curso_id'=> 'required',
           ]);
 
@@ -72,16 +77,17 @@ class DetalleNotaController extends Controller
         $detallenotas->nota = $request->input('nota');
         $detallenotas->aspecto_id  = $request->input('aspecto_id');
         $detallenotas->bimestre_id  = $request->input('bimestre_id');
-        $detallenotas->tipo_evaluacion_id = $request->input('tipo_evaluacion_id'); 
-        $detallenotas->estudiante_id = $request->input('estudiante_id'); 
-        $detallenotas->curso_id = $request->input('curso_id'); 
-       
+        $detallenotas->tipo_evaluacion_id = $request->input('tipo_evaluacion_id');
+        $detallenotas->estudiante_id = $request->input('estudiante_id');
+        $detallenotas->ciclo_id = $request->input('ciclo_id');
+        $detallenotas->curso_id = $request->input('curso_id');
+
 
          $detallenotas->save();
          return redirect('/detalle_nota')->with('success', 'detalle de nota almacenada :D');
-          
 
-        
+
+
     }
 
     /**
@@ -99,9 +105,9 @@ class DetalleNotaController extends Controller
         $notas = Nota::all();
         $aspectos = Aspecto::all();
         $bloques = Bloque::all();
+        $ciclos = Ciclo::all();
 
-
-        return view('docentes/notas/detalle_nota_show', compact('notas_detalle','estudiantes','cursos','tipo_evaluaciones','notas','aspectos','bloques'));
+        return view('docentes/notas/detalle_nota_show', compact('notas_detalle','estudiantes','cursos','tipo_evaluaciones','notas','aspectos','bloques', 'ciclos'));
     }
 
     /**
@@ -119,9 +125,9 @@ class DetalleNotaController extends Controller
         $notas = Nota::all();
         $aspectos = Aspecto::all();
         $bloques = Bloque::all();
+        $ciclos = Ciclo::all();
 
-
-        return view('docentes/notas/detalle_nota_edit', compact('notas_detalle','estudiantes','cursos','tipo_evaluaciones','notas','aspectos','bloques'));
+        return view('docentes/notas/detalle_nota_edit', compact('notas_detalle','estudiantes','cursos','tipo_evaluaciones','notas','aspectos','bloques', 'ciclos'));
     }
 
     /**
@@ -136,9 +142,9 @@ class DetalleNotaController extends Controller
         //
         $notas_detalle = DetalleNota::find($id);
         $notas_detalle->fill($request->all())->save();
-        
+
         $request->session()->flash('alert-success', 'Nota Actualizada');
-        return redirect()->route('detalle_nota.index.index'); 
+        return redirect()->route('detalle_nota.index.index');
     }
 
     /**

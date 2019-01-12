@@ -14,6 +14,7 @@ class DetalleNota extends Model
         'tipo_evaluacion_id',
         'bimestre_id',
         'estudiante_id',
+        'ciclo_id',
         'curso_id',
         'asignacion_id',
     ];
@@ -25,7 +26,7 @@ class DetalleNota extends Model
     public function tipo_evaluacion(){//Un detalle de nota le pertenece a un tipo de evaluación
         return $this->belongsTo(TipoEvaluacion::class);
     }
-    
+
     public function bimestre(){//Un detalle le pertenece a un solo bloque
         return $this->belongsTo(Bimestre::class);
     }

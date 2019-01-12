@@ -250,8 +250,8 @@
                                     @if(Auth::check() && Auth::user()->can('estudiantes.cursos.index'))
                                         <li class="nav-item ">
                                             <a class="nav-link" href="{{ route('estudiantes.cursos.index') }}">
-                                              <span class="sidebar-mini"> C </span>
-                                              <span class="sidebar-normal"> Cursos </span>
+                                              <span class="sidebar-mini"> NC </span>
+                                              <span class="sidebar-normal"> Notas por ciclo </span>
                                             </a>
                                         </li>
                                     @endif
@@ -259,8 +259,8 @@
                                     @if(Auth::check() && Auth::user()->can('estudiantes.horario.index'))
                                         <li class="nav-item ">
                                             <a class="nav-link" href="{{ route('estudiantes.horario.index') }}">
-                                              <span class="sidebar-mini"> HR </span>
-                                              <span class="sidebar-normal"> Horario Clases </span>
+                                              <span class="sidebar-mini"> NB </span>
+                                              <span class="sidebar-normal"> Notas por bimestre </span>
                                             </a>
                                         </li>
                                     @endif
