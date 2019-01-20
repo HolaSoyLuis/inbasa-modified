@@ -1,25 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
+// use DB;
+use Illuminate\Support\Facades\DB;
 
-use DB;
-
-use App\Curso;
-use App\Grado;
-use App\Empleado;
-use App\Cargo;
-
-use App\Nota;
-use App\Ciclo;
-use App\Estudiante;
-use App\User;
-use App\Asignacion;
-use App\DetalleNota;
-use App\Bimestre;
-
-class HorarioController extends Controller
+class role_user_controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,28 +15,12 @@ class HorarioController extends Controller
      */
     public function index()
     {
-        return view('docentes/horario/horario');
+        //
+        $data = DB::table('role_user')->get();
+
+        return view('admin.rol_user.index', ['data' => $data]);
     }
 
-    //Devuelve vista de los horarios de hijos de encargados
-    public function indexEN(){
-        return view('encargado/horario/horario');
-    }
-
-    //Vista del horario de clases del estudiante
-    public function indexES(){
-        $user_data = Auth::user();
-        $data = DB::select("select concat(fecha_inicio, ' a ', fecha_fin) as ciclo, cursos.nombre as curso, SUM(nota) as nota, bimestre from users
-            inner join role_user on role_user.user_id = users.id
-            inner join estudiantes on estudiantes.usuario_id = role_user.user_id
-            inner join detalle_notas on detalle_notas.estudiante_id = estudiantes.id
-            inner join bimestres on detalle_notas.bimestre_id = bimestres.id
-            inner join ciclos on bimestres.ciclo_id = ciclos.id
-            inner join cursos on detalle_notas.curso_id = cursos.id
-            where usuario_id = ? group by bimestre;", [$user_data->id]);
-        
-        return view('estudiante/horario/horario', compact('data'));
-    }
     /**
      * Show the form for creating a new resource.
      *

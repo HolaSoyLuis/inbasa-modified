@@ -542,7 +542,7 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('/detalle_nota','DetalleNotaController');
     //Route::resource('/nota','NotaController');
 
-
+    Route::resource('/role_user', 'role_user_controller');
 
 
     // Route::resource('/admin/comprobante', 'ComprobanteController')->middleware('permission::comprobante');

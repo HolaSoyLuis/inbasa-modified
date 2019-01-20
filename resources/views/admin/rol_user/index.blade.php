@@ -20,7 +20,6 @@
 				<div class="table-responsive">
 					<table id="datatable_table" class="table table-condensed table-hover">
 						<thead>
-							<td></td>
 							<td>Id</td>
               				<td>User id</td>
 							<td>Role id</td>
