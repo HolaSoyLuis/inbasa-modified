@@ -78,6 +78,15 @@
                                         </li>
                                     @endif
 
+                                    @if(Auth::check() && Auth::user()->can('role_user.index'))
+                                        <li class="nav-item ">
+                                            <a class="nav-link" href="{{ route('role_user.index') }}">
+                                              <span class="sidebar-mini"> RU </span>
+                                              <span class="sidebar-normal"> Roles y usuarios </span>
+                                            </a>
+                                        </li>
+                                    @endif
+
                                     @if(Auth::check() && Auth::user()->can('personal.index'))
                                         <li class="nav-item ">
                                             <a class="nav-link" href="{{ route('empleados.index') }}">

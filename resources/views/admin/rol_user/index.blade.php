@@ -7,6 +7,12 @@
 		  <div class="container">		    		    		    
 		    <div class="collapse navbar-collapse">
 		      <ul class="navbar-nav">
+		      	<li class="nav-item active">
+		          <a class="nav-link" href="{{ route('role_user.index') }}">Lista de usuarios y roles</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="{{ route('role_user.create') }}">Crear nuevo registro rol-usuario</a>
+		        </li>
 		      </ul>
 		    </div>
 		  </div>
@@ -20,15 +26,17 @@
 				<div class="table-responsive">
 					<table id="datatable_table" class="table table-condensed table-hover">
 						<thead>
-							<td>Id</td>
-              				<td>User id</td>
-							<td>Role id</td>
+							<td>Rol</td>
+              				<td>Usuario</td>
+							<td>Estudiante</td>
+							<td>Empleado</td>
 						</thead>
 						@foreach($data as $d)
 						<tr>
-						<td class="td-actions text-left">{{$d->id}}</td>
-              			<td class="td-actions text-left">{{$d->user_id}}</td>
-              			<td class="td-actions text-left">{{$d->role_id}}</td>
+						<td class="td-actions text-left">{{$d->rol}}</td>
+              			<td class="td-actions text-left">{{$d->usuario}}</td>
+              			<td class="td-actions text-left">{{$d->estudiante}}</td>
+              			<td class="td-actions text-left">{{$d->empleado}}</td>
 						</tr>	
 						@endforeach						
 					</table>
