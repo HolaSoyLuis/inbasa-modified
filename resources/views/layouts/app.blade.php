@@ -48,7 +48,7 @@
                         </li>
                     @endif
 
-                    @if(Auth::check() && (Auth::user()->can('usuarios.index'))||(Auth::user()->can('roles.index'))||(Auth::user()->can('personal.index'))||(Auth::user()->can('cargos.index'))||(Auth::user()->can('estudiantes.index'))||(Auth::user()->can('ciclos.index'))||(Auth::user()->can('bloques.index'))||(Auth::user()->can('ciclos.index'))||(Auth::user()->can('grados.index'))||(Auth::user()->can('secciones.index'))||(Auth::user()->can('cursos.index'))||(Auth::user()->can('centros.index'))||(Auth::user()->can('respaldos.index'))||(Auth::user()->can('encargados.index')))
+                    @if(Auth::check() && (Auth::user()->can('usuarios.index'))||(Auth::user()->can('roles.index'))||(Auth::user()->can('personal.index'))||(Auth::user()->can('cargos.index'))||(Auth::user()->can('estudiantes.index'))||(Auth::user()->can('ciclos.index'))||(Auth::user()->can('bloques.index'))||(Auth::user()->can('ciclos.index'))||(Auth::user()->can('grados.index'))||(Auth::user()->can('secciones.index'))||(Auth::user()->can('cursos.index'))||(Auth::user()->can('centros.index'))||(Auth::user()->can('respaldos.index')))
                         {{-- Botones Módulo Administración --}}
                         <li class="nav-item ">
                             <a class="nav-link" data-toggle="collapse" href="#modAdmin">
@@ -105,14 +105,6 @@
                                         </li>
                                     @endif
 
-                                    @if(Auth::check() && Auth::user()->can('encargado.index'))
-                                        <li class="nav-item ">
-                                            <a class="nav-link" href="{{ route('encargado.index') }}">
-                                            <span class="sidebar-mini"> EN </span>
-                                            <span class="sidebar-normal"> Encargados </span>
-                                            </a>
-                                        </li>
-                                    @endif
 
                                     @if(Auth::check() && (Auth::user()->can('ciclos.index')||Auth::user()->can('bloques.index')))
                                         <li class="nav-item ">
@@ -208,41 +200,6 @@
                         {{-- Fin Botones Docentes --}}
                     @endif
 
-
-                    @if(Auth::check() && (Auth::user()->can('encargados.notas.index'))||(Auth::user()->can('encargados.horario.index')))
-                        {{-- Botones Módulo Encargados --}}
-                        <li class="nav-item ">
-                            <a class="nav-link" data-toggle="collapse" href="#modEncargado">
-                                <i class="material-icons">face</i>
-                                <p> Encargado
-                                   <b class="caret"></b>
-                                </p>
-                            </a>
-
-                            <div class="collapse" id="modEncargado">
-                                <ul class="nav">
-                                    @if(Auth::check() && Auth::user()->can('encargados.notas.index'))
-                                        <li class="nav-item ">
-                                            <a class="nav-link" href="{{ route('encargados.notas.index') }}">
-                                              <span class="sidebar-mini"> NT </span>
-                                              <span class="sidebar-normal"> Notas </span>
-                                            </a>
-                                        </li>
-                                    @endif
-
-                                    @if(Auth::check() && Auth::user()->can('encargados.horario.index'))
-                                        <li class="nav-item ">
-                                            <a class="nav-link" href="{{ route('encargados.horario.index') }}">
-                                              <span class="sidebar-mini"> HR </span>
-                                              <span class="sidebar-normal"> Horario Clases </span>
-                                            </a>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </div>
-                        </li>
-                        {{-- Fin Botones Encargados --}}
-                    @endif
 
                     @if(Auth::check() && (Auth::user()->can('estudiantes.cursos.index'))||(Auth::user()->can('estudiantes.horario.index')))
                         {{-- Botones Módulo Estudiantes --}}

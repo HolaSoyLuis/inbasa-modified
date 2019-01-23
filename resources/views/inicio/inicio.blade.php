@@ -51,22 +51,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-danger card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">face</i>
-                        </div>
-                        <p class="card-category">Encargados</p>
-                        <h3 class="card-title">{{$encargados}}</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <a href="{{ route('encargado.index') }}" class="btn btn-sm">Ver</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="card card-stats">
                 <div class="card-header card-header-info card-header-icon">
